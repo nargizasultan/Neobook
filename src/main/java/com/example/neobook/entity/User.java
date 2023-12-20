@@ -10,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -27,10 +28,24 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
-
     private String phone;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Product>products;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userCart")
+    private List<Product> cart;
+    private int sumOfProducts;
+
+    public void addToCart(Product product){
+        cart.add(product);
+        sumOfProducts+=product.getPrice();
+    }
+
+    public void removeFromCart(Product product){
+        cart.remove(product);
+        sumOfProducts-=product.getPrice();
+    }
 
 
     @Override

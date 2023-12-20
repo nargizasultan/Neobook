@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Literal;
+
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -15,12 +18,23 @@ import lombok.Setter;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
-    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq" )
+    @SequenceGenerator(name = "product_gen", sequenceName = "product_seq", allocationSize = 1)
     private Long id;
-    @Enumerated(EnumType.STRING)
-    private Category category;
+
     private String name;
     private String image;
     private int price;
     private String description;
+    @ManyToOne
+    private Category category;
+
+    @ManyToOne()
+    private User user;
+    @ManyToOne
+    private User userCart;
+
+
+
+
+
 }
