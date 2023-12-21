@@ -28,10 +28,16 @@ public class Product {
     @ManyToOne
     private Category category;
 
-    @ManyToOne()
-    private User user;
-    @ManyToOne
-    private User userCart;
+
+    @ManyToMany
+    private List<User> usersCart;
+
+    public void addUser(User user){
+        this.usersCart.add(user);
+    }
+    public void removeUser(User user){
+        this.usersCart.remove(user);
+    }
 
 
 

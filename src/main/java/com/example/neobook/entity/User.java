@@ -31,9 +31,7 @@ public class User implements UserDetails {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Role role;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Product>products;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userCart")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "usersCart")
     private List<Product> cart;
     private int sumOfProducts;
 

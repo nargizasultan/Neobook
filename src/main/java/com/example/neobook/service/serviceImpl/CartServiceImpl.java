@@ -32,9 +32,20 @@ public class CartServiceImpl implements CartService {
         Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("product with id " + productId + " doesn't exists"));
         User user = currentUser();
         user.addToCart(product);
+        product.addUser(user);
         userRepository.save(user);
-        product.setUser(user);
-        return new SimpleResponse(HttpStatus.OK, "product successfully added to card");
+        return new SimpleResponse(HttpStatus.OK, "product successfully added to cart");
+    }
+
+    @Override
+    public SimpleResponse removeFromCart(Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new NoSuchElementException("product with id " + productId + " doesn't exists"));
+        User user = currentUser();
+        user.removeFromCart(product);
+        product.removeUser(user);
+        userRepository.save(user);
+        return new SimpleResponse(HttpStatus.OK, "product successfully removed from cart");
+
     }
 
     private User currentUser() {

@@ -15,9 +15,13 @@ public class CartApi {
     public int getSumOfPrice() {
         return cartService.getSumOfPrice();
     }
-    @PostMapping("{productId}/add")
+    @PostMapping("/{productId}/add")
     public SimpleResponse addToCart(@PathVariable Long productId){
         return cartService.addToCart(productId);
+    }
+    @DeleteMapping("/{productId}/remove")
+    public SimpleResponse removeFromCart(@PathVariable Long productId){
+        return cartService.removeFromCart(productId);
     }
 
 }

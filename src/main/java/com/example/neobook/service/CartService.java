@@ -8,4 +8,6 @@ public interface CartService {
      int getSumOfPrice();
 
      SimpleResponse addToCart(Long productId);
+
+     SimpleResponse removeFromCart(Long productId);
 }
