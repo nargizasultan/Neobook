@@ -3,6 +3,7 @@ package com.example.neobook.api;
 import com.example.neobook.dto.SimpleResponse;
 import com.example.neobook.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.dialect.unique.CreateTableUniqueDelegate;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,5 +24,10 @@ public class CartApi {
     public SimpleResponse removeFromCart(@PathVariable Long productId){
         return cartService.removeFromCart(productId);
     }
+    @DeleteMapping("/all")
+    public SimpleResponse removeAllProducts(){
+        return cartService.removeAllProducts();
+    }
+
 
 }

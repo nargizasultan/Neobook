@@ -21,9 +21,10 @@ import java.util.NoSuchElementException;
 public class CartServiceImpl implements CartService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+
     @Override
     public int getSumOfPrice() {
-      return currentUser().getSumOfProducts();
+        return currentUser().getSumOfProducts();
     }
 
     @Override
@@ -46,6 +47,16 @@ public class CartServiceImpl implements CartService {
         userRepository.save(user);
         return new SimpleResponse(HttpStatus.OK, "product successfully removed from cart");
 
+    }
+
+    @Override
+    @Transactional
+    public SimpleResponse removeAllProducts() {
+
+        User user = currentUser();
+        user.setSumOfProducts(0);
+        user.setCart(null);
+        return new SimpleResponse(HttpStatus.OK, "all product successfully removed from cart");
     }
 
     private User currentUser() {

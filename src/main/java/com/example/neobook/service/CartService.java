@@ -10,4 +10,6 @@ public interface CartService {
      SimpleResponse addToCart(Long productId);
 
      SimpleResponse removeFromCart(Long productId);
+
+     SimpleResponse removeAllProducts();
 }
