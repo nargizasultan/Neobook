@@ -16,6 +16,7 @@ public class CartApi {
     @GetMapping
     public int getSumOfPrice() {
         return cartService.getSumOfPrice();
+
     }
     @PostMapping("/{productId}/add")
     public SimpleResponse addToCart(@PathVariable Long productId){
